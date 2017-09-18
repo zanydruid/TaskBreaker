@@ -9,29 +9,63 @@ import java.util.Date;
 @Entity(tableName = "Tasks")
 public class Task {
 
-    enum Status {
+    public enum Status {
         IN_PROGRESS, COMPLETED, FAILED
     }
+
 
     @PrimaryKey(autoGenerate = true)
     public int tId;
 
     @ColumnInfo(name = "created")
-    public Date created;
+    private Date created;
 
     @ColumnInfo(name = "content")
-    public String content;
+    private String content;
 
     @ColumnInfo(name = "deadline")
-    public Date deadline;
+    private Date deadline;
 
     @ColumnInfo(name = "status")
-    public Status status;
+    private Status status;
 
     public Task(Date created, String content, Date deadline) {
         this.created = created;
         this.content = content;
         this.deadline = deadline;
         this.status = Status.IN_PROGRESS;
+    }
+
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

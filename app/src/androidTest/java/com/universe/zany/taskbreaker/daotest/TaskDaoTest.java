@@ -56,7 +56,7 @@ public class TaskDaoTest {
         assertEquals(1, resultList.size());
         int taskId = resultList.get(0).tId;
         Task resultTaskById = mDatabase.taskDao().findTaskById(taskId);
-        assertEquals(task.content, resultTaskById.content);
+        assertEquals(task.getContent(), resultTaskById.getContent());
         List<Task> resultListBySearch = mDatabase.taskDao().searchTaskByContent("%test%");
         assertEquals(1, resultListBySearch.size());
 

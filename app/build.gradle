@@ -47,4 +47,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
+
+    // lombok
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    provided "org.projectlombok:lombok:1.16.16"
+    annotationProcessor "org.projectlombok:lombok:1.16.16"
+
 }
