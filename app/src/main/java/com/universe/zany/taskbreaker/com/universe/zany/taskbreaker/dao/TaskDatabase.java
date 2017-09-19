@@ -12,4 +12,5 @@ import com.universe.zany.taskbreaker.core.Task;
 @TypeConverters({DateConverter.class, StatusConverter.class})
 public abstract class TaskDatabase extends RoomDatabase {
     public abstract TaskDao taskDao();
+
 }

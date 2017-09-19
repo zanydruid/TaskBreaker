@@ -13,9 +13,8 @@ public class Task {
         IN_PROGRESS, COMPLETED, FAILED
     }
 
-
     @PrimaryKey(autoGenerate = true)
-    public int tId;
+    private int id;
 
     @ColumnInfo(name = "created")
     private Date created;
@@ -36,6 +35,15 @@ public class Task {
         this.status = Status.IN_PROGRESS;
     }
 
+    // getters and setters
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public Date getCreated() {
         return created;
