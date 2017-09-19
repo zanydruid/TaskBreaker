@@ -5,12 +5,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
 import com.universe.zany.taskbreaker.core.DateConverter;
+import com.universe.zany.taskbreaker.core.Item;
 import com.universe.zany.taskbreaker.core.StatusConverter;
 import com.universe.zany.taskbreaker.core.Task;
 
-@Database(entities = {Task.class}, version = 1)
+@Database(entities = {Task.class, Item.class}, version = 1)
 @TypeConverters({DateConverter.class, StatusConverter.class})
-public abstract class TaskDatabase extends RoomDatabase {
+public abstract class TaskItemDatabase extends RoomDatabase {
     public abstract TaskDao taskDao();
+
+    public abstract ItemDao itemDao();
 
 }
