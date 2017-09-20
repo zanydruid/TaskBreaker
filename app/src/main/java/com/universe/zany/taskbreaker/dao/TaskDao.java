@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.com.universe.zany.taskbreaker.dao;
+package com.universe.zany.taskbreaker.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -22,8 +22,8 @@ public interface TaskDao {
     @Query("SELECT * FROM Tasks")
     LiveData<List<Task>> loadAllTask();
 
-    @Query("SELECT * FROM Tasks WHERE deadline > :now")
-    LiveData<List<Task>> loadTaskFromDeadline(Long now);
+    @Query("SELECT * FROM Tasks WHERE deadline BETWEEN :start AND :end")
+    LiveData<List<Task>> loadTasksInRange(Long start, Long end);
 
     @Query("SELECT * FROM Tasks WHERE content LIKE :keyword")
     LiveData<List<Task>> searchTaskByContent(String keyword);
