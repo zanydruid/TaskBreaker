@@ -29,7 +29,7 @@ public class  TaskTest {
         assertEquals(month + 1, task.getMonth());
         assertEquals(day + 1, task.getDay());
 
-        System.out.println("created at: " + now.toString());
+        System.out.println("task id: " + task.getId() + " created at: " + now.toString());
         System.out.println("deadline at month: " + task.getMonth() + " day: " + task.getDay());
     }
 }
