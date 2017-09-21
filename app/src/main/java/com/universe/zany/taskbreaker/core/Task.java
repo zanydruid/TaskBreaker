@@ -47,6 +47,12 @@ public class Task {
         this.day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
+    public String toString() {
+        return "task: " + this.content +
+                " created at: " + this.created +
+                " deadline at: " + this.deadline;
+    }
+
     // getters and setters
 
     public void setId(int id) {

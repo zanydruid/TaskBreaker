@@ -1,7 +1,7 @@
 package com.universe.zany.taskbreaker.core;
 
-import android.arch.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Day {
@@ -11,6 +11,11 @@ public class Day {
     public Day(int day, List<Task> tasks) {
         this.day = day;
         this.tasks = tasks;
+    }
+
+    public Day(int day){
+        this.day = day;
+        this.tasks = new ArrayList<>();
     }
 
     public Task getTask(int position) {
@@ -24,6 +29,15 @@ public class Day {
 
     public void addTask(Task task) {
         this.tasks.add(task);
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("day " + this.day + " :\n");
+        for (Task task : this.tasks) {
+            sb.append("\t" + task.toString() + "\n");
+        }
+        return sb.toString();
     }
 
     public int getDay() {
