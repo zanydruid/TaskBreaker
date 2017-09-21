@@ -1,11 +1,12 @@
 package com.universe.zany.taskbreaker.UI;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.universe.zany.taskbreaker.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MonthPageViewActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

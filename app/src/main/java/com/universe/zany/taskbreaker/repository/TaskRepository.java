@@ -54,6 +54,19 @@ public class TaskRepository {
         return this.taskDao.loadTasksInRange(start, end);
     }
 
+    public LiveData<List<Task>> getTasksInMonth(Date today) {
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+
+        return this.taskDao.loadTasksInMonth(year, month);
+    }
+
+    public LiveData<List<Task>> getTasksByKeyword(String keyword) {
+        return this.taskDao.searchTaskByContent("%" + keyword +"%");
+    }
+
     public void createTask(Task task) {
         this.taskDao.insertTask(task);
     }

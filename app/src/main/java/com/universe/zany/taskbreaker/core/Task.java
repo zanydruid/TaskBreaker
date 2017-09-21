@@ -30,6 +30,9 @@ public class Task {
     @ColumnInfo(name = "status")
     private Status status;
 
+    @ColumnInfo(name = "year")
+    private int year;
+
     @ColumnInfo(name = "month")
     private int month;
 
@@ -43,6 +46,7 @@ public class Task {
         this.status = Status.IN_PROGRESS;
         Calendar cal = new GregorianCalendar();
         cal.setTime(deadline);
+        this.year = cal.get(Calendar.YEAR);
         this.month = cal.get(Calendar.MONTH);
         this.day = cal.get(Calendar.DAY_OF_MONTH);
     }
@@ -109,5 +113,13 @@ public class Task {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

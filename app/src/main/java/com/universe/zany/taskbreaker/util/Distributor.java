@@ -4,7 +4,6 @@ package com.universe.zany.taskbreaker.util;
 import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
-import com.universe.zany.taskbreaker.repository.TaskRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,9 +12,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Distributor {
-    public static final int FUTURE_LENGTH = 3;
+    public static final int FUTURE_LENGTH = 6;
 
-    public static List<Month> fillTasksInMonth(Date today, List<Task> tasks) {
+    public static List<Month> fillTasksInNowAndFutureMonth(Date today, List<Task> tasks) {
         Calendar cal = new GregorianCalendar();
         cal.setTime(today);
         int startMonth = cal.get(Calendar.MONTH);
@@ -36,5 +35,17 @@ public class Distributor {
         return resultsMonth;
     }
 
+    public static Month fillTaskInMonth(Date today, List<Task> tasks) {
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+
+        Month month = new Month(cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+
+        for (Task task : tasks) {
+            month.getDays().get(task.getDay()).addTask(task);
+        }
+
+        return month;
+    }
 
 }
