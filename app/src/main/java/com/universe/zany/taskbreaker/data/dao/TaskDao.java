@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.dao;
+package com.universe.zany.taskbreaker.data.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
