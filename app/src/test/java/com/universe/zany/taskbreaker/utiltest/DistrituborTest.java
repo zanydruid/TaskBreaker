@@ -6,10 +6,6 @@ import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.util.Distributor;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import static org.mockito.Mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -46,13 +42,14 @@ public class DistrituborTest {
         Task task3 = new Task(new Date(), "task 3: task month + 0, day + 2", date2);
         Task task4 = new Task(new Date(), "task 4: task month + 0, day + 35", date3);
         Task task5 = new Task(new Date(), "task 5: task month + 2, day + 0", date4);
+
         List<Task> mockTaskList = new ArrayList<>();
         mockTaskList.add(task1);
         mockTaskList.add(task2);
         mockTaskList.add(task3);
         mockTaskList.add(task4);
         mockTaskList.add(task5);
-        List<Month> resultList = Distributor.fillTasksInMonth(new Date(), mockTaskList);
+        List<Month> resultList = Distributor.fillTasksInNowAndFutureMonth(new Date(), mockTaskList);
         assertEquals(3, resultList.size());
         for (Month month : resultList) {
             System.out.print(month.toString());

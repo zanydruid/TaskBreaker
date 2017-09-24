@@ -1,9 +1,9 @@
-package com.universe.zany.taskbreaker.repository;
+package com.universe.zany.taskbreaker.data.repository;
 
 import android.arch.lifecycle.LiveData;
 
 import com.universe.zany.taskbreaker.core.Task;
-import com.universe.zany.taskbreaker.dao.TaskDao;
+import com.universe.zany.taskbreaker.data.dao.TaskDao;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -52,6 +52,15 @@ public class TaskRepository {
         Long end = cal.getTimeInMillis();
 
         return this.taskDao.loadTasksInRange(start, end);
+    }
+
+    public LiveData<List<Task>> getTasksInMonth(int year, int month) {
+
+        return this.taskDao.loadTasksInMonth(year, month);
+    }
+
+    public LiveData<List<Task>> getTasksByKeyword(String keyword) {
+        return this.taskDao.searchTaskByContent("%" + keyword +"%");
     }
 
     public void createTask(Task task) {
