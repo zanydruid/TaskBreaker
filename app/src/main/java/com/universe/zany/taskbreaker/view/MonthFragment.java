@@ -26,13 +26,26 @@ public class MonthFragment extends Fragment {
 
     private TextView monthTextView;
 
+    public static MonthFragment newInstance(int year, int month) {
+        MonthFragment fragment = new MonthFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(YEAR, year);
+        bundle.putInt(MONTH, month);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mYear = getArguments().getInt(YEAR);
+        mMonth = getArguments().getInt(MONTH);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mYear = getArguments().getInt(YEAR);
-        mMonth = getArguments().getInt(MONTH);
-        //viewModel = ViewModelProviders.of(this).get(MonthViewModel.class);
-        //viewModel.init(mYear, mMonth);
+        // setup viewmodel here
 
     }
 
@@ -44,7 +57,7 @@ public class MonthFragment extends Fragment {
         Locale locale = Locale.getDefault();
         Calendar cal = new GregorianCalendar();
         cal.set(Calendar.MONTH, mMonth);
-        monthTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale));
+        monthTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + mYear);
 
         return viewGroup;
     }

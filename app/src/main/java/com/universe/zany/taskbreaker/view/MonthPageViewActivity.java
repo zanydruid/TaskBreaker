@@ -9,15 +9,15 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.util.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MonthPageViewActivity extends FragmentActivity {
+public class MonthPageViewActivity extends BaseActivity {
 
-    private static final String YEAR = "year";
-    private static final String MONTH = "month";
+
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private int mYear;
@@ -52,12 +52,8 @@ public class MonthPageViewActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Bundle bundle = new Bundle();
-            bundle.putInt(YEAR, year);
-            bundle.putInt(MONTH, months.get(position));
-            MonthFragment fragment = new MonthFragment();
-            fragment.setArguments(bundle);
-            return fragment;
+
+            return MonthFragment.newInstance(this.year, this.months.get(position));
         }
 
         @Override
