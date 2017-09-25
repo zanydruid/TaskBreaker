@@ -39,7 +39,8 @@ public class DayInMonthAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView dummyView = new TextView(mContext);
-        dummyView.setText(String.valueOf(days.get(i).getDay()));
+        dummyView.setText(String.valueOf(days.get(i).getDay())
+                + " Tasks(" + days.get(i).getTasks().size() + ")");
         return dummyView;
     }
 }

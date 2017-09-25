@@ -9,15 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
-import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
-import com.universe.zany.taskbreaker.util.Distributor;
-import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
+import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
 
 
 import java.util.Calendar;
@@ -36,13 +35,14 @@ public class MonthFragment extends Fragment {
     private static final String MONTH = "month";
     private int mYear;
     private int mMonth;
-    private MonthViewModel viewModel;
+    private TaskViewModel viewModel;
     private Month month;
     @Inject ViewModelProvider.Factory factory;
     // views
     private TextView monthTextView;
     private GridView daysGridView;
     private DayInMonthAdapter dayAdapter;
+    private Button createButton;
 
 
     public static MonthFragment newInstance(int year, int month) {
@@ -74,7 +74,7 @@ public class MonthFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // setup viewmodel here
-        viewModel = ViewModelProviders.of(this, factory).get(MonthViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(TaskViewModel.class);
 
         // observe task list
         viewModel.getTasksByMonth(mYear, mMonth).observe(this, new Observer<List<Task>>() {
@@ -91,16 +91,27 @@ public class MonthFragment extends Fragment {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_month, container, false);
         // header textview
-        monthTextView = viewGroup.findViewById(R.id.test_month_text_view);
+        monthTextView = viewGroup.findViewById(R.id.frg_month_text_view);
         Locale locale = Locale.getDefault();
         Calendar cal = new GregorianCalendar();
         cal.set(Calendar.MONTH, mMonth);
         monthTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + mYear);
 
         // grid view
-        daysGridView = viewGroup.findViewById(R.id.grid_view);
+        daysGridView = viewGroup.findViewById(R.id.frg_month_grid_view);
         dayAdapter = new DayInMonthAdapter(getContext(), month.getDays());
         daysGridView.setAdapter(dayAdapter);
+
+        // create button
+        createButton = viewGroup.findViewById(R.id.frg_month_create);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+                // start createActivity
+            }
+        });
+
         return viewGroup;
     }
 }

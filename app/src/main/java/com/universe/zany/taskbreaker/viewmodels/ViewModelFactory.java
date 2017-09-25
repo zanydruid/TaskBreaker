@@ -20,8 +20,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(MonthViewModel.class)) {
-            return (T) new MonthViewModel(repository);
+        if (modelClass.isAssignableFrom(TaskViewModel.class)) {
+            return (T) new TaskViewModel(repository);
         } else {
             throw new IllegalArgumentException();
         }

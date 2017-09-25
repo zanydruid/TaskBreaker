@@ -1,6 +1,7 @@
 package com.universe.zany.taskbreaker.injection;
 
 
+import com.universe.zany.taskbreaker.view.CreateFragment;
 import com.universe.zany.taskbreaker.view.MonthFragment;
 
 import javax.inject.Singleton;
@@ -12,6 +13,7 @@ import dagger.Component;
 public interface TaskComponent {
 
     void inject(MonthFragment fragment);
+    void inject(CreateFragment fragment);
 
     final class Initializer {
         private Initializer() {}
