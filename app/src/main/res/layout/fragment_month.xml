@@ -4,11 +4,23 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/test_month_test_view"
+        android:id="@+id/frg_month_text_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Month"
         android:layout_gravity="center_horizontal"
         />
+    <GridView
+        android:id="@+id/frg_month_grid_view"
+        android:numColumns="auto_fit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="5dp"/>
+    <Button
+        android:id="@+id/frg_month_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_task"/>
 
 </LinearLayout>

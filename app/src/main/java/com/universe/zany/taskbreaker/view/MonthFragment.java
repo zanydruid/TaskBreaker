@@ -9,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
-import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
+import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
 
 
 import java.util.Calendar;
@@ -23,7 +26,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import injection.MainApplication;
+import com.universe.zany.taskbreaker.injection.MainApplication;
 
 
 public class MonthFragment extends Fragment {
@@ -32,11 +35,15 @@ public class MonthFragment extends Fragment {
     private static final String MONTH = "month";
     private int mYear;
     private int mMonth;
-    private MonthViewModel viewModel;
-
+    private TaskViewModel viewModel;
+    private Month month;
     @Inject ViewModelProvider.Factory factory;
+    // views
     private TextView monthTextView;
-    private List<Task> mTaskList;
+    private GridView daysGridView;
+    private DayInMonthAdapter dayAdapter;
+    private Button createButton;
+
 
     public static MonthFragment newInstance(int year, int month) {
         MonthFragment fragment = new MonthFragment();
@@ -51,36 +58,59 @@ public class MonthFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // dependencies injection
         ((MainApplication) getActivity().getApplication())
                 .getTaskComponent().inject(this);
 
+        // get arguments
         mYear = getArguments().getInt(YEAR);
         mMonth = getArguments().getInt(MONTH);
+
+        // set up month
+        month = new Month(mYear, mMonth);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // setup viewmodel here
-        viewModel = ViewModelProviders.of(this, factory).get(MonthViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(TaskViewModel.class);
 
+        // observe task list
         viewModel.getTasksByMonth(mYear, mMonth).observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
-                mTaskList = tasks;
+                month.fillInTasks(tasks);
+                dayAdapter.notifyDataSetChanged();
             }
         });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_month, container, false);
-        monthTextView = viewGroup.findViewById(R.id.test_month_test_view);
 
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_month, container, false);
+        // header textview
+        monthTextView = viewGroup.findViewById(R.id.frg_month_text_view);
         Locale locale = Locale.getDefault();
         Calendar cal = new GregorianCalendar();
         cal.set(Calendar.MONTH, mMonth);
         monthTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + mYear);
+
+        // grid view
+        daysGridView = viewGroup.findViewById(R.id.frg_month_grid_view);
+        dayAdapter = new DayInMonthAdapter(getContext(), month.getDays());
+        daysGridView.setAdapter(dayAdapter);
+
+        // create button
+        createButton = viewGroup.findViewById(R.id.frg_month_create);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+                // start createActivity
+            }
+        });
 
         return viewGroup;
     }
