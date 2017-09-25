@@ -2,20 +2,25 @@ package com.universe.zany.taskbreaker.viewmodeltest;
 
 import com.universe.zany.taskbreaker.data.repository.TaskRepository;
 import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
+import com.universe.zany.taskbreaker.viewmodels.ViewModelFactory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MonthViewModelTest {
+public class ViewModelFactoryTest {
 
     @Mock
     TaskRepository repo;
-
     @Test
-    public void tests() {
+    public void test() {
+
+        ViewModelFactory factory = new ViewModelFactory(repo);
+
+        assertEquals(MonthViewModel.class, factory.create(MonthViewModel.class).getClass());
     }
 }
