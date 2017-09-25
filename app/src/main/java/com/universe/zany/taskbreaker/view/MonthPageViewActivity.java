@@ -42,8 +42,10 @@ public class MonthPageViewActivity extends BaseActivity {
     }
 
     private class MonthPagerAdapter extends FragmentStatePagerAdapter {
+
         private List<Integer> months;
         private int year;
+
         public MonthPagerAdapter(FragmentManager fm, int year, List<Integer> months) {
             super(fm);
             this.year = year;

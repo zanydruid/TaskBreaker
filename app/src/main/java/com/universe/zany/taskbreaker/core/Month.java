@@ -9,14 +9,14 @@ public class Month {
     private int month;
     private List<Day> days;
 
-    public Month(int month, int year) {
-        this.month = month;
+    public Month(int year, int month) {
+        this.month = month % 12;
 
         int size;
-        if (month == 1 || month == 3 || month == 5
-                || month == 7 || month == 8 || month == 10 || month == 12) {
+        if (this.month == 0 || this.month == 2 || this.month == 4
+                || this.month == 6 || this.month == 7 || this.month == 9 || this.month == 11) {
             size = 31;
-        } else if (month == 2) {
+        } else if (this.month == 1) {
             if ((year % 4 == 0) && (year % 100 != 0)||(year % 400 == 0)) {
                 size = 29;
             } else {
@@ -31,6 +31,12 @@ public class Month {
         while (day < size) {
             this.days.add(new Day(day + 1));
             day++;
+        }
+    }
+
+    public void fillInTasks(List<Task> tasks) {
+        for (Task task : tasks) {
+            this.getDays().get(task.getDay()).addTask(task);
         }
     }
 

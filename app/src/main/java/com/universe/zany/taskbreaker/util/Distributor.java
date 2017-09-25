@@ -35,17 +35,15 @@ public class Distributor {
         return resultsMonth;
     }
 
-    public static Month fillTaskInMonth(Date today, List<Task> tasks) {
-        Calendar cal = new GregorianCalendar();
-        cal.setTime(today);
+    public static Month fillTaskInMonth(int year, int month, List<Task> tasks) {
 
-        Month month = new Month(cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+        Month currentMonth = new Month(year, month);
 
         for (Task task : tasks) {
-            month.getDays().get(task.getDay()).addTask(task);
+            currentMonth.getDays().get(task.getDay()).addTask(task);
         }
 
-        return month;
+        return currentMonth;
     }
 
 }

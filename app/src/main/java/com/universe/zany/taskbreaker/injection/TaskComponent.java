@@ -1,7 +1,5 @@
-package injection;
+package com.universe.zany.taskbreaker.injection;
 
-
-import android.app.Fragment;
 
 import com.universe.zany.taskbreaker.view.MonthFragment;
 

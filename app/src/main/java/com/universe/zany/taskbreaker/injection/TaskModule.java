@@ -1,4 +1,4 @@
-package injection;
+package com.universe.zany.taskbreaker.injection;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;

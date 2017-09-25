@@ -1,9 +1,7 @@
-package injection;
+package com.universe.zany.taskbreaker.injection;
 
 
 import android.app.Application;
-
-import com.universe.zany.taskbreaker.core.Task;
 
 public class MainApplication extends Application {
 
