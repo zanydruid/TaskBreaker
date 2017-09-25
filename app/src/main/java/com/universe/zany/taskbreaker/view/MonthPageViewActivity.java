@@ -54,8 +54,11 @@ public class MonthPageViewActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-
-            return MonthFragment.newInstance(this.year, this.months.get(position));
+            int currentYear = this.year;
+            if (this.months.get(position) > 11) {
+                currentYear++;
+            }
+            return MonthFragment.newInstance(currentYear, this.months.get(position));
         }
 
         @Override

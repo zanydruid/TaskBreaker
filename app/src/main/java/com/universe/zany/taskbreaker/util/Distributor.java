@@ -35,15 +35,4 @@ public class Distributor {
         return resultsMonth;
     }
 
-    public static Month fillTaskInMonth(int year, int month, List<Task> tasks) {
-
-        Month currentMonth = new Month(year, month);
-
-        for (Task task : tasks) {
-            currentMonth.getDays().get(task.getDay()).addTask(task);
-        }
-
-        return currentMonth;
-    }
-
 }
