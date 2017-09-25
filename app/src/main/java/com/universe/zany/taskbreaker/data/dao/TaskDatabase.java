@@ -10,7 +10,7 @@ import com.universe.zany.taskbreaker.core.Task;
 
 @Database(entities = {Task.class}, version = 1)
 @TypeConverters({DateConverter.class, StatusConverter.class})
-public abstract class TaskItemDatabase extends RoomDatabase {
+public abstract class TaskDatabase extends RoomDatabase {
 
     public abstract TaskDao taskDao();
 }

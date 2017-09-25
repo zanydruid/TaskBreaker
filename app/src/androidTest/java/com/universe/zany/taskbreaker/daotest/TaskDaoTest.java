@@ -6,7 +6,7 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.universe.zany.taskbreaker.data.dao.TaskItemDatabase;
+import com.universe.zany.taskbreaker.data.dao.TaskDatabase;
 import com.universe.zany.taskbreaker.core.Task;
 
 
@@ -25,13 +25,13 @@ import static com.universe.zany.taskbreaker.daotest.SyncLiveData.getValue;
 
 @RunWith(AndroidJUnit4.class)
 public class TaskDaoTest {
-    private TaskItemDatabase mDatabase;
+    private TaskDatabase mDatabase;
 
     @Before
     public void setup() throws Exception{
         mDatabase = Room.inMemoryDatabaseBuilder(
                 InstrumentationRegistry.getContext(),
-                TaskItemDatabase.class).build();
+                TaskDatabase.class).build();
     }
 
     @After

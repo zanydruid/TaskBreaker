@@ -1,5 +1,8 @@
 package com.universe.zany.taskbreaker.view;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,22 +12,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
+
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
+
+import injection.MainApplication;
 
 
 public class MonthFragment extends Fragment {
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
-    private MonthViewModel viewModel;
     private int mYear;
     private int mMonth;
+    private MonthViewModel viewModel;
 
+    @Inject ViewModelProvider.Factory factory;
     private TextView monthTextView;
+    private List<Task> mTaskList;
 
     public static MonthFragment newInstance(int year, int month) {
         MonthFragment fragment = new MonthFragment();
@@ -38,6 +50,10 @@ public class MonthFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((MainApplication) getActivity().getApplication())
+                .getTaskComponent().inject(this);
+
         mYear = getArguments().getInt(YEAR);
         mMonth = getArguments().getInt(MONTH);
     }
@@ -46,7 +62,14 @@ public class MonthFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // setup viewmodel here
+        viewModel = ViewModelProviders.of(this, factory).get(MonthViewModel.class);
 
+        viewModel.getTasksByMonth(mYear, mMonth).observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(@Nullable List<Task> tasks) {
+                mTaskList = tasks;
+            }
+        });
     }
 
     @Override
