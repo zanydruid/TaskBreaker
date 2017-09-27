@@ -82,7 +82,7 @@ public class MonthFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
                 month.fillInTasks(tasks);
-                updateList(month.getDays());
+                updateList(month);
             }
         });
     }
@@ -114,7 +114,7 @@ public class MonthFragment extends Fragment {
         return viewGroup;
     }
 
-    private void updateList(List<Day> days) {
+    private void updateList(Month month) {
         GridLayoutManager manager = new GridLayoutManager(getContext(), GRID_COLUMN);
         recyclerView.setLayoutManager(manager);
 
@@ -122,7 +122,7 @@ public class MonthFragment extends Fragment {
         DayItemDecorator decorator = new DayItemDecorator(3);
         recyclerView.addItemDecoration(decorator);
 
-        dayAdapter = new DayInMonthAdapter(days);
+        dayAdapter = new DayInMonthAdapter(month);
         recyclerView.setAdapter(dayAdapter);
     }
 }
