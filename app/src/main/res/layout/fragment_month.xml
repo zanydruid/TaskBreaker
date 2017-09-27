@@ -26,8 +26,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/frg_month_recycler_view"
-        android:layout_width="368dp"
-        android:layout_height="428dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toTopOf="@+id/frg_month_create_button"

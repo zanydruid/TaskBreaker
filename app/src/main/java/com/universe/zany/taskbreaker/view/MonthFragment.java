@@ -18,8 +18,8 @@ import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
+import com.universe.zany.taskbreaker.injection.MainApplication;
 import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
-
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -28,13 +28,12 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import com.universe.zany.taskbreaker.injection.MainApplication;
-
 
 public class MonthFragment extends Fragment {
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
+    private static final int GRID_COLUMN = 5;
     private int mYear;
     private int mMonth;
     private TaskViewModel viewModel;
@@ -116,8 +115,13 @@ public class MonthFragment extends Fragment {
     }
 
     private void updateList(List<Day> days) {
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 5);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), GRID_COLUMN);
         recyclerView.setLayoutManager(manager);
+
+        // add divider
+        DayItemDecorator decorator = new DayItemDecorator(3);
+        recyclerView.addItemDecoration(decorator);
+
         dayAdapter = new DayInMonthAdapter(days);
         recyclerView.setAdapter(dayAdapter);
     }
