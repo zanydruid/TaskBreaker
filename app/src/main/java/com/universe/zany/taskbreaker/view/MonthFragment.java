@@ -6,14 +6,16 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
@@ -40,7 +42,7 @@ public class MonthFragment extends Fragment {
     @Inject ViewModelProvider.Factory factory;
     // views
     private TextView monthTextView;
-    private GridView daysGridView;
+    private RecyclerView recyclerView;
     private DayInMonthAdapter dayAdapter;
     private Button createButton;
 
@@ -81,7 +83,7 @@ public class MonthFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
                 month.fillInTasks(tasks);
-                dayAdapter.notifyDataSetChanged();
+                updateList(month.getDays());
             }
         });
     }
@@ -97,13 +99,11 @@ public class MonthFragment extends Fragment {
         cal.set(Calendar.MONTH, mMonth);
         monthTextView.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + mYear);
 
-        // grid view
-        daysGridView = viewGroup.findViewById(R.id.frg_month_grid_view);
-        dayAdapter = new DayInMonthAdapter(getContext(), month.getDays());
-        daysGridView.setAdapter(dayAdapter);
+        // recycler view
+        recyclerView = viewGroup.findViewById(R.id.frg_month_recycler_view);
 
         // create button
-        createButton = viewGroup.findViewById(R.id.frg_month_create);
+        createButton = viewGroup.findViewById(R.id.frg_month_create_button);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,5 +113,12 @@ public class MonthFragment extends Fragment {
         });
 
         return viewGroup;
+    }
+
+    private void updateList(List<Day> days) {
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 5);
+        recyclerView.setLayoutManager(manager);
+        dayAdapter = new DayInMonthAdapter(days);
+        recyclerView.setAdapter(dayAdapter);
     }
 }
