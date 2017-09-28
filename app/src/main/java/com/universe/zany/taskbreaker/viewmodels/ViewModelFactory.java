@@ -15,6 +15,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
 
     @Inject
     public ViewModelFactory(TaskRepository repository) {
+
         this.repository = repository;
     }
 

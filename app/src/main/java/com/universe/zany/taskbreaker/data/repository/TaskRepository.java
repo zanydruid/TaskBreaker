@@ -67,6 +67,10 @@ public class TaskRepository {
         this.taskDao.insertTask(task);
     }
 
+    public void createTasks(List<Task> tasks) {
+        this.taskDao.insertTasks(tasks);
+    }
+
     public void updateTask(Task task) {
         this.taskDao.updateTasks(task);
     }

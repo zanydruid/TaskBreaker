@@ -51,6 +51,10 @@ public class Task {
         this.day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
+    public Task(Task task) {
+        this(task.getCreated(), task.getContent(), task.getDeadline());
+    }
+
     public String toString() {
         return "task: " + this.content +
                 " created at: " + this.created +

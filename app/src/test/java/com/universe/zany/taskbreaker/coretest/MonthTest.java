@@ -1,8 +1,15 @@
 package com.universe.zany.taskbreaker.coretest;
 
 import com.universe.zany.taskbreaker.core.Month;
+import com.universe.zany.taskbreaker.core.Task;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class MonthTest {

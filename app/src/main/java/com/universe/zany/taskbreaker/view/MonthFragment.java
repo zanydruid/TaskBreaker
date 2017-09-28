@@ -3,6 +3,7 @@ package com.universe.zany.taskbreaker.view;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
-import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
@@ -33,7 +33,8 @@ public class MonthFragment extends Fragment {
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
-    private static final int GRID_COLUMN = 5;
+    private static final int GRID_COLUMN_PORTRAIT = 5;
+    private static final int GRID_COLUMN_LANDSCAPE = 6;
     private int mYear;
     private int mMonth;
     private TaskViewModel viewModel;
@@ -115,7 +116,14 @@ public class MonthFragment extends Fragment {
     }
 
     private void updateList(Month month) {
-        GridLayoutManager manager = new GridLayoutManager(getContext(), GRID_COLUMN);
+        GridLayoutManager manager;
+        if (getActivity().getResources()
+                .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            manager = new GridLayoutManager(getContext(), GRID_COLUMN_PORTRAIT);
+        } else {
+            manager = new GridLayoutManager(getContext(), GRID_COLUMN_LANDSCAPE);
+        }
+
         recyclerView.setLayoutManager(manager);
 
         // add divider
