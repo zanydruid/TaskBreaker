@@ -1,5 +1,6 @@
 package com.universe.zany.taskbreaker.view;
 
+import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -18,15 +20,22 @@ import android.widget.TextView;
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
+import com.universe.zany.taskbreaker.util.DatePickerFragment;
 import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.SimpleFormatter;
 
 import javax.inject.Inject;
 
-public class CreateFragment extends Fragment {
+public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
 
     @Inject
     ViewModelProvider.Factory factory;
     private TaskViewModel viewModel;
+    private boolean useStartDatePicker;
 
     Task mTask;
 
@@ -42,6 +51,8 @@ public class CreateFragment extends Fragment {
     EditText contentEdit;
     Button cancelButton;
     Button createButton;
+    // dialog fragment
+    DatePickerFragment datePickerFragment;
 
 
     public CreateFragment() {
@@ -66,6 +77,8 @@ public class CreateFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this, factory).get(TaskViewModel.class);
         mTask = new Task();
+        datePickerFragment = DatePickerFragment.newDialog(this);
+
     }
 
     @Override
@@ -80,6 +93,9 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO show date picker dialog
+                // set useStartDatePicker to true
+                useStartDatePicker = true;
+                datePickerFragment.show(getFragmentManager(), "date_picker");
             }
         });
         deadlinePicker = view.findViewById(R.id.frg_create_deadline_pick_button);
@@ -87,6 +103,9 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO show date picker dialog
+                // set useStartDatePicker to false
+                useStartDatePicker = false;
+                datePickerFragment.show(getFragmentManager(), "date_picker");
             }
         });
 
@@ -136,4 +155,26 @@ public class CreateFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        // TODO
+        // if(useStartDatePicker) set start date
+        // else set deadline date
+        int year = i;
+        int month = i1;
+        int day = i2;
+        Calendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        String date = format.format(cal.getTime());
+        if (useStartDatePicker) {
+            startDateTextView.setText(date);
+            mTask.setCreated(cal.getTime());
+        } else {
+            deadlineTextView.setText(date);
+            mTask.setDeadline(cal.getTime());
+        }
+    }
 }
