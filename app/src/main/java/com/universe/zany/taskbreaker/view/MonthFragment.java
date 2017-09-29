@@ -3,6 +3,8 @@ package com.universe.zany.taskbreaker.view;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
-import com.universe.zany.taskbreaker.core.Day;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
@@ -33,7 +34,8 @@ public class MonthFragment extends Fragment {
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
-    private static final int GRID_COLUMN = 5;
+    private static final int GRID_COLUMN_PORTRAIT = 5;
+    private static final int GRID_COLUMN_LANDSCAPE = 6;
     private int mYear;
     private int mMonth;
     private TaskViewModel viewModel;
@@ -82,7 +84,7 @@ public class MonthFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
                 month.fillInTasks(tasks);
-                updateList(month.getDays());
+                updateList(month);
             }
         });
     }
@@ -108,21 +110,30 @@ public class MonthFragment extends Fragment {
             public void onClick(View view) {
                 //TODO
                 // start createActivity
+                Intent intent = new Intent(getActivity(), CreateActivity.class);
+                startActivity(intent);
             }
         });
 
         return viewGroup;
     }
 
-    private void updateList(List<Day> days) {
-        GridLayoutManager manager = new GridLayoutManager(getContext(), GRID_COLUMN);
+    private void updateList(Month month) {
+        GridLayoutManager manager;
+        if (getActivity().getResources()
+                .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            manager = new GridLayoutManager(getContext(), GRID_COLUMN_PORTRAIT);
+        } else {
+            manager = new GridLayoutManager(getContext(), GRID_COLUMN_LANDSCAPE);
+        }
+
         recyclerView.setLayoutManager(manager);
 
         // add divider
         DayItemDecorator decorator = new DayItemDecorator(3);
         recyclerView.addItemDecoration(decorator);
 
-        dayAdapter = new DayInMonthAdapter(days);
+        dayAdapter = new DayInMonthAdapter(month);
         recyclerView.setAdapter(dayAdapter);
     }
 }

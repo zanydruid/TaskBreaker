@@ -3,7 +3,7 @@ package com.universe.zany.taskbreaker.utiltest;
 
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
-import com.universe.zany.taskbreaker.util.Distributor;
+import com.universe.zany.taskbreaker.util.TaskManager;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,7 +49,7 @@ public class DistrituborTest {
         mockTaskList.add(task3);
         mockTaskList.add(task4);
         mockTaskList.add(task5);
-        List<Month> resultList = Distributor.fillTasksInNowAndFutureMonth(new Date(), mockTaskList);
+        List<Month> resultList = TaskManager.fillTasksInNowAndFutureMonth(new Date(), mockTaskList);
         assertEquals(3, resultList.size());
         for (Month month : resultList) {
             System.out.print(month.toString());

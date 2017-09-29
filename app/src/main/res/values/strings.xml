@@ -1,4 +1,30 @@
 <resources>
     <string name="app_name">TaskBreaker</string>
     <string name="new_task">New Task</string>
+    <string name="content">Content</string>
+    <string name="start_date">Start Date</string>
+    <string name="deadline">Deadline</string>
+    <string name="type">Task Type</string>
+    <string name="duration">Duration</string>
+    <string name="duration_input_hint">7</string>
+    <string name="duration_hint">Continues for</string>
+    <string name="content_hint">Type in content of the task.</string>
+    <string name="start_date_sample">05-21-2017</string>
+    <string name="deadline_sample">09-22-2017</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string-array name="task_type">
+        <item>Single</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
+    <string-array name="duration_array_unit">
+        <item>day(s)</item>
+        <item>week(s)</item>
+        <item>month(s)</item>
+        <item>year(s)</item>
+    </string-array>
 </resources>

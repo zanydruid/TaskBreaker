@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day {
+
+    public static final int EMPTY = 0;
+    public static final int CASUAL = 1;
+    public static final int BUSY = 2;
+    public static final int SUPER_BUSY = 3;
+
     private int day;
     private List<Task> tasks;
 
@@ -29,6 +35,18 @@ public class Day {
 
     public void addTask(Task task) {
         this.tasks.add(task);
+    }
+
+    public int getStatus() {
+        if (tasks.size() == 0) {
+            return EMPTY;
+        } else if (tasks.size() < 5) {
+            return CASUAL;
+        } else if (tasks.size() < 10) {
+            return BUSY;
+        } else {
+            return SUPER_BUSY;
+        }
     }
 
     public String toString() {

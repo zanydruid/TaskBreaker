@@ -34,10 +34,27 @@ public class Month {
         }
     }
 
+    /**
+     * Fill tasks into correct days in a month
+     * @param tasks
+     */
     public void fillInTasks(List<Task> tasks) {
         for (Task task : tasks) {
             this.getDays().get(task.getDay()).addTask(task);
         }
+    }
+
+    /**
+     * Get number of tasks in a month
+     * @return
+     */
+    public int getTaskNumber() {
+        int count = 0;
+        for (Day day : days) {
+            count += day.getTasks().size();
+        }
+
+        return count;
     }
 
     public String toString() {

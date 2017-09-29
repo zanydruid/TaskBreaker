@@ -2,6 +2,7 @@ package com.universe.zany.taskbreaker.core;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Calendar;
@@ -49,6 +50,14 @@ public class Task {
         this.year = cal.get(Calendar.YEAR);
         this.month = cal.get(Calendar.MONTH);
         this.day = cal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    @Ignore
+    public Task() {}
+
+    @Ignore
+    public Task(Task task) {
+        this(task.getCreated(), task.getContent(), task.getDeadline());
     }
 
     public String toString() {

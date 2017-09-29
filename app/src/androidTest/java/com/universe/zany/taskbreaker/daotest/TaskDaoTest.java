@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,9 +65,15 @@ public class TaskDaoTest {
         Task task3 = new Task(new Date(), "task 3: task month + 0, day + 2", date2);
         Task task4 = new Task(new Date(), "task 4: task month + 0, day + 35", date3);
         Task task5 = new Task(new Date(), "task 5: task month + 2, day + 0", date4);
+        List<Task> mockTasks = new ArrayList<>();
+        mockTasks.add(task1);
+        mockTasks.add(task2);
+        mockTasks.add(task3);
+        mockTasks.add(task4);
+        mockTasks.add(task5);
 
         // test loadAllTask
-        mDatabase.taskDao().insertTask(task1, task2, task3, task4, task5);
+        mDatabase.taskDao().insertTasks(mockTasks);
         List<Task> allTasks = getValue(mDatabase.taskDao().loadAllTask());
         assertEquals(5, allTasks.size());
 
@@ -86,9 +93,6 @@ public class TaskDaoTest {
         Task findTask = getValue(mDatabase.taskDao().findTaskById(tempTask.getId()));
         assertEquals(tempTask.getContent(), findTask.getContent());
 
-
     }
-
-
 
 }

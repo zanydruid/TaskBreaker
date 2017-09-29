@@ -1,9 +1,7 @@
 package com.universe.zany.taskbreaker.view;
 
 import android.graphics.Color;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +10,17 @@ import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Day;
+import com.universe.zany.taskbreaker.core.Month;
 
-import java.util.List;
+import java.util.Calendar;
 
 
 public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.TaskDayViewHolder> {
 
-    private List<Day> days;
+    private Month  mMonth;
 
-    public DayInMonthAdapter(List<Day> days) {
-        this.days = days;
+    public DayInMonthAdapter(Month month) {
+        mMonth = month;
     }
 
     @Override
@@ -33,16 +32,42 @@ public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.Ta
 
     @Override
     public void onBindViewHolder(TaskDayViewHolder holder, int position) {
-        Day currentDay = days.get(position);
+        Day currentDay = mMonth.getDays().get(position);
         holder.textView.setText(String.valueOf(currentDay.getDay()));
-        if (currentDay.getTasks().size() == 0) {
+
+        // set background color
+        boolean passed = false;
+        Calendar cal = Calendar.getInstance();
+        if (cal.get(Calendar.MONTH) > mMonth.getMonth()) {
+            passed = true;
+        } else if (cal.get(Calendar.MONTH) == mMonth.getMonth()
+                && cal.get(Calendar.DAY_OF_MONTH) > currentDay.getDay()) {
+            passed = true;
+        }
+
+        if (passed) {
             holder.background.setBackgroundColor(Color.GRAY);
+        } else {
+            switch (currentDay.getStatus()) {
+                case Day.EMPTY:
+                    holder.background.setBackgroundColor(Color.WHITE);
+                    break;
+                case Day.CASUAL:
+                    holder.background.setBackgroundColor(Color.YELLOW);
+                    break;
+                case Day.BUSY:
+                    holder.background.setBackgroundColor(Color.GREEN);
+                    break;
+                case Day.SUPER_BUSY:
+                    holder.background.setBackgroundColor(Color.RED);
+                    break;
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return days.size();
+        return mMonth.getDays().size();
     }
 
 

@@ -19,6 +19,9 @@ public interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTask(Task... tasks);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertTasks(List<Task> tasks);
+
     @Query("SELECT * FROM Tasks")
     LiveData<List<Task>> loadAllTask();
 
