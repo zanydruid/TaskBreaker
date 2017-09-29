@@ -3,6 +3,7 @@ package com.universe.zany.taskbreaker.view;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -109,6 +110,8 @@ public class MonthFragment extends Fragment {
             public void onClick(View view) {
                 //TODO
                 // start createActivity
+                Intent intent = new Intent(getActivity(), CreateActivity.class);
+                startActivity(intent);
             }
         });
 

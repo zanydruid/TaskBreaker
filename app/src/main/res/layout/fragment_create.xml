@@ -1,24 +1,28 @@
-<ScrollView
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    tools:context="com.universe.zany.taskbreaker.view.CreateFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/frameLayout"
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.universe.zany.taskbreaker.view.CreateFragment"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="81dp">
-
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/frg_create_header_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/new_task"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +31,7 @@
             android:id="@+id/frg_create_startdate_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="60dp"
             android:text="@string/start_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,29 +41,31 @@
             android:id="@+id/frg_create_startdatepick_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginStart="32dp"
             android:text="@string/start_date_sample"
             app:layout_constraintBaseline_toBaselineOf="@+id/frg_create_startdate_textview"
-            app:layout_constraintEnd_toStartOf="@+id/frg_startdate_pick_button"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/frg_create_startdate_pick_button"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/frg_create_startdate_textview" />
 
         <ImageButton
-            android:id="@+id/frg_deadline_pick_button"
+            android:id="@+id/frg_create_deadline_pick_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="40dp"
+            android:contentDescription="@string/deadline"
             android:src="@android:drawable/ic_menu_my_calendar"
             app:layout_constraintBottom_toBottomOf="@+id/frg_create_deadlinepick_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/frg_create_deadlinepick_textview" />
 
         <ImageButton
-            android:id="@+id/frg_startdate_pick_button"
-            android:layout_width="0dp"
+            android:id="@+id/frg_create_startdate_pick_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="40dp"
+            android:contentDescription="@string/start_date"
             android:src="@android:drawable/ic_menu_my_calendar"
             app:layout_constraintBottom_toBottomOf="@+id/frg_create_startdatepick_textview"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,19 +75,19 @@
             android:id="@+id/frg_create_deadlinepick_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginStart="32dp"
             android:text="@string/deadline_sample"
             app:layout_constraintBaseline_toBaselineOf="@+id/frg_create_deadline_textview"
-            app:layout_constraintEnd_toStartOf="@+id/frg_deadline_pick_button"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/frg_create_deadline_pick_button"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/frg_create_deadline_textview" />
 
         <TextView
             android:id="@+id/frg_create_deadline_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="60dp"
             android:text="@string/deadline"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,61 +97,102 @@
             android:id="@+id/frg_create_type_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="60dp"
             android:text="@string/type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frg_create_deadline_textview" />
 
-        <TextView
-            android:id="@+id/frg_create_duration_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="60dp"
-            android:text="@string/duration"
-            app:layout_constraintStart_toEndOf="@+id/frg_create_type_textview"
-            app:layout_constraintTop_toBottomOf="@+id/frg_create_deadlinepick_textview" />
-
         <Spinner
             android:id="@+id/frg_create_type_spinner"
-            android:layout_width="70dp"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/frg_create_type_textview"
             app:layout_constraintStart_toStartOf="@+id/frg_create_type_textview"
             app:layout_constraintTop_toBottomOf="@+id/frg_create_type_textview" />
 
         <Spinner
             android:id="@+id/frg_create_duration_spinner"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/frg_create_duration_textview"
-            app:layout_constraintTop_toBottomOf="@+id/frg_create_duration_textview" />
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frg_create_duration_hint_textview" />
 
         <TextView
             android:id="@+id/frg_create_content_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
             android:text="@string/content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frg_create_type_spinner" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/frg_create_content_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:ems="4"
+            android:hint="@string/content_hint"
+            android:inputType="textAutoCorrect|textAutoComplete|textMultiLine"
+            android:maxLines="4"
+            android:singleLine="false"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="@+id/frg_create_content_textview"
             app:layout_constraintTop_toBottomOf="@+id/frg_create_content_textview" />
+
+        <Button
+            android:id="@+id/frg_create_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/frg_create_ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/ok"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/frg_create_duration_hint_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/duration_hint"
+            app:layout_constraintStart_toEndOf="@+id/frg_create_type_spinner"
+            app:layout_constraintTop_toTopOf="@+id/frg_create_type_spinner" />
+
+        <EditText
+            android:id="@+id/frg_create_duration_input_edit"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="@string/duration_input_hint"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/frg_create_duration_hint_textview"
+            app:layout_constraintEnd_toStartOf="@+id/frg_create_duration_spinner"
+            app:layout_constraintStart_toEndOf="@+id/frg_create_duration_hint_textview" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
 
 
-</ScrollView>
+
