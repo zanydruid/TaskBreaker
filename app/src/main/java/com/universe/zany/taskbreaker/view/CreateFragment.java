@@ -1,5 +1,6 @@
 package com.universe.zany.taskbreaker.view;
 
+import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -22,11 +24,12 @@ import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
 
 import javax.inject.Inject;
 
-public class CreateFragment extends Fragment {
+public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
 
     @Inject
     ViewModelProvider.Factory factory;
     private TaskViewModel viewModel;
+    private boolean useStartDatePicker;
 
     Task mTask;
 
@@ -80,6 +83,7 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO show date picker dialog
+                // set useStartDatePicker to true
             }
         });
         deadlinePicker = view.findViewById(R.id.frg_create_deadline_pick_button);
@@ -87,6 +91,7 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO show date picker dialog
+                // set useStartDatePicker to false
             }
         });
 
@@ -136,4 +141,10 @@ public class CreateFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        // TODO
+        // if(useStartDatePicker) set start date
+        // else set deadline date
+    }
 }

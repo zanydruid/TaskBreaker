@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.view;
+package com.universe.zany.taskbreaker.util;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;

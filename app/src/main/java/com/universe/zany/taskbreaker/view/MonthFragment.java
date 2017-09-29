@@ -20,6 +20,8 @@ import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Month;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
+import com.universe.zany.taskbreaker.util.DayInMonthAdapter;
+import com.universe.zany.taskbreaker.util.DayItemDecorator;
 import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
 
 import java.util.Calendar;
