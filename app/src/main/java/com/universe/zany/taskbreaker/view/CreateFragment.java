@@ -26,11 +26,14 @@ import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.logging.SimpleFormatter;
 
 import javax.inject.Inject;
 
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
+
+    private static final String YEAR = "year";
+    private static final String MONTH = "month";
+    private static final String DAY = "day";
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -38,6 +41,9 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private boolean useStartDatePicker;
 
     Task mTask;
+    int mYear;
+    int mMonth;
+    int mDay;
 
     // views
     TextView startDateTextView;
@@ -59,8 +65,13 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         // Required empty public constructor
     }
 
-    public static CreateFragment newInstance() {
+    public static CreateFragment newInstance(int year, int month, int day) {
         CreateFragment fragment = new CreateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(YEAR, year);
+        bundle.putInt(MONTH, month);
+        bundle.putInt(DAY, day);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -70,14 +81,21 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         ((MainApplication) getActivity().getApplication())
                 .getTaskComponent()
                 .inject(this);
+
+        mYear = getArguments().getInt(YEAR);
+        mMonth = getArguments().getInt(MONTH);
+        mDay = getArguments().getInt(DAY);
+        Calendar cal = createCal(mYear, mMonth, mDay);
+        mTask = new Task();
+        mTask.setCreated(cal.getTime());
+        datePickerFragment = DatePickerFragment.newDialog(this);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this, factory).get(TaskViewModel.class);
-        mTask = new Task();
-        datePickerFragment = DatePickerFragment.newDialog(this);
+
 
     }
 
@@ -86,13 +104,19 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_create, container, false);
+
+        // set up view
         startDateTextView = view.findViewById(R.id.frg_create_startdatepick_textview);
+        Calendar cal = createCal(mYear, mMonth, mDay);
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        String date = format.format(cal.getTime());
+        startDateTextView.setText(date);
+
         deadlineTextView = view.findViewById(R.id.frg_create_deadlinepick_textview);
         startDatePicker = view.findViewById(R.id.frg_create_startdate_pick_button);
         startDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO show date picker dialog
                 // set useStartDatePicker to true
                 useStartDatePicker = true;
                 datePickerFragment.show(getFragmentManager(), "date_picker");
@@ -102,7 +126,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         deadlinePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO show date picker dialog
                 // set useStartDatePicker to false
                 useStartDatePicker = false;
                 datePickerFragment.show(getFragmentManager(), "date_picker");
@@ -157,16 +180,10 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        // TODO
         // if(useStartDatePicker) set start date
         // else set deadline date
-        int year = i;
-        int month = i1;
-        int day = i2;
-        Calendar cal = new GregorianCalendar();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, day);
+
+        Calendar cal = createCal(i, i1, i2);
         SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
         String date = format.format(cal.getTime());
         if (useStartDatePicker) {
@@ -176,5 +193,13 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
             deadlineTextView.setText(date);
             mTask.setDeadline(cal.getTime());
         }
+    }
+
+    private Calendar createCal(int year, int month, int day) {
+        Calendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        return cal;
     }
 }

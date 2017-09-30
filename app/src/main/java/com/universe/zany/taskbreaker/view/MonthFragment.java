@@ -110,9 +110,17 @@ public class MonthFragment extends Fragment {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
                 // start createActivity
                 Intent intent = new Intent(getActivity(), CreateActivity.class);
+                Bundle bundle = new Bundle();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                bundle.putInt("today_year", year);
+                bundle.putInt("today_month", month);
+                bundle.putInt("today_day", day);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
