@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.daotest;
+package com.universe.zany.taskbreaker.instrumentationtests;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;

@@ -85,7 +85,7 @@ public class MonthFragment extends Fragment {
         viewModel.getTasksByMonth(mYear, mMonth).observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
-                month.fillInTasks(tasks);
+                month = Month.fillInTasks(tasks, mYear, mMonth);
                 updateList(month);
             }
         });

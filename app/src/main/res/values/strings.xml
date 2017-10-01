@@ -13,6 +13,8 @@
     <string name="deadline_sample">09-22-2017</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="another_new_task">Create Another New Task</string>
+    <string name="confirm_create_title">Confirm Task information, Action is permanent!!!</string>
 
     <string-array name="task_type">
         <item>Single</item>

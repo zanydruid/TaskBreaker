@@ -103,7 +103,7 @@
 
         <Spinner
             android:id="@+id/frg_create_type_spinner"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/frg_create_type_textview"
@@ -114,7 +114,7 @@
             android:id="@+id/frg_create_duration_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/frg_create_duration_hint_textview" />
 
@@ -168,7 +168,7 @@
             android:id="@+id/frg_create_duration_hint_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:text="@string/duration_hint"
             app:layout_constraintStart_toEndOf="@+id/frg_create_type_spinner"
             app:layout_constraintTop_toTopOf="@+id/frg_create_type_spinner" />

@@ -38,10 +38,12 @@ public class Month {
      * Fill tasks into correct days in a month
      * @param tasks
      */
-    public void fillInTasks(List<Task> tasks) {
+    public static Month fillInTasks(List<Task> tasks, int year, int month) {
+        Month returnMonth = new Month(year, month);
         for (Task task : tasks) {
-            this.getDays().get(task.getDay()).addTask(task);
+            returnMonth.getDays().get(task.getDay() - 1).addTask(task);
         }
+        return returnMonth;
     }
 
     /**

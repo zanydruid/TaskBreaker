@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.daotest;
+package com.universe.zany.taskbreaker.instrumentationtests;
 
 
 import android.arch.persistence.room.Room;
@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.universe.zany.taskbreaker.daotest.SyncLiveData.getValue;
+import static com.universe.zany.taskbreaker.instrumentationtests.SyncLiveData.getValue;
 
 
 @RunWith(AndroidJUnit4.class)
