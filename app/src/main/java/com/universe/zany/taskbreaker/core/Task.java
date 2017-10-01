@@ -40,6 +40,16 @@ public class Task {
     @ColumnInfo(name = "day")
     private int day;
 
+    /**
+     * -1 - not specified
+     * 0 - Single
+     * 1 - Daily
+     * 2 - Weekly
+     * 3 - Monthly
+     */
+    @Ignore
+    private int type = -1;
+
     public Task(Date created, String content, Date deadline) {
         this.created = created;
         this.content = content;
@@ -130,5 +140,13 @@ public class Task {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

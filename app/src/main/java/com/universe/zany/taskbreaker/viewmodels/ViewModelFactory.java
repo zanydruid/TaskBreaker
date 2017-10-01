@@ -23,6 +23,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(TaskViewModel.class)) {
             return (T) new TaskViewModel(repository);
+        } else if (modelClass.isAssignableFrom(CreateViewModel.class)) {
+            return (T) new CreateViewModel(repository);
         } else {
             throw new IllegalArgumentException();
         }
