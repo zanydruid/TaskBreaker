@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 public class CreateViewModel extends ViewModel{
 
+
     private TaskRepository repo;
 
     @Inject
@@ -29,7 +30,6 @@ public class CreateViewModel extends ViewModel{
     public void createSingleTask(Task task) {
         AsyncCreateSingleTask job = new AsyncCreateSingleTask();
         job.execute(task);
-        //this.repo.createTask(task);
     }
 
     /**
@@ -49,7 +49,7 @@ public class CreateViewModel extends ViewModel{
             tasks.add(new Task(task));
         }
 
-        this.repo.createTasks(tasks);
+        new AsyncCreateMultiTasks().execute(tasks);
     }
 
     /**
@@ -63,13 +63,13 @@ public class CreateViewModel extends ViewModel{
         cal.setTime(task.getDeadline());
 
         tasks.add(new Task(task));
-        for (int i = 0; i < duration; i = i + 7) {
+        for (int i = 0; i < duration - 1; i = i + 7) {
             cal.add(Calendar.DAY_OF_YEAR, 7);
             task.setDeadline(cal.getTime());
             tasks.add(new Task(task));
         }
 
-        this.repo.createTasks(tasks);
+        new AsyncCreateMultiTasks().execute(tasks);
     }
 
     /**
@@ -90,7 +90,7 @@ public class CreateViewModel extends ViewModel{
             tasks.add(new Task(task));
         }
 
-        this.repo.createTasks(tasks);
+        new AsyncCreateMultiTasks().execute(tasks);
     }
 
     private class AsyncCreateSingleTask extends AsyncTask<Task, Void, Void> {
@@ -98,6 +98,15 @@ public class CreateViewModel extends ViewModel{
         @Override
         protected Void doInBackground(Task... tasks) {
             repo.createTask(tasks[0]);
+            return null;
+        }
+    }
+
+    private class AsyncCreateMultiTasks extends AsyncTask<List<Task>, Void, Void> {
+
+        @Override
+        protected Void doInBackground(List<Task>[] lists) {
+            repo.createTasks(lists[0]);
             return null;
         }
     }
