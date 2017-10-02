@@ -27,27 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/frg_create_startdate_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
-            android:text="@string/start_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/frg_create_startdatepick_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="32dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/frg_create_startdate_textview"
-            app:layout_constraintEnd_toStartOf="@+id/frg_create_startdate_pick_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/frg_create_startdate_textview" />
-
         <ImageButton
             android:id="@+id/frg_create_deadline_pick_button"
             android:layout_width="wrap_content"
@@ -58,17 +37,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/frg_create_deadlinepick_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/frg_create_deadlinepick_textview" />
-
-        <ImageButton
-            android:id="@+id/frg_create_startdate_pick_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:contentDescription="@string/start_date"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            app:layout_constraintBottom_toBottomOf="@+id/frg_create_startdatepick_textview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frg_create_startdatepick_textview" />
 
         <TextView
             android:id="@+id/frg_create_deadlinepick_textview"
@@ -86,10 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:text="@string/deadline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frg_create_startdate_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/frg_create_header_textview" />
 
         <TextView
             android:id="@+id/frg_create_type_textview"
@@ -145,24 +113,16 @@
             app:layout_constraintTop_toBottomOf="@+id/frg_create_content_textview" />
 
         <Button
-            android:id="@+id/frg_create_cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="32dp"
-            android:text="@string/cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
             android:id="@+id/frg_create_ok_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="@string/ok"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/frg_create_duration_hint_textview"
