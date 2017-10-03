@@ -37,6 +37,9 @@ public interface TaskDao {
     @Query("SELECT * FROM Tasks WHERE year = :year AND month = :month")
     LiveData<List<Task>> loadTasksInMonth(int year, int month);
 
+    @Query("SELECT * FROM Tasks WhERE year = :year AND month = :month AND day = :day")
+    LiveData<List<Task>> loadTasksInDay(int year, int month, int day);
+
     @Update
     void updateTasks(Task... task);
 

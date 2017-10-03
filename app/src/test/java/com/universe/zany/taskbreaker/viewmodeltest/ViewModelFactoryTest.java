@@ -1,7 +1,7 @@
 package com.universe.zany.taskbreaker.viewmodeltest;
 
 import com.universe.zany.taskbreaker.data.repository.TaskRepository;
-import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
+import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
 import com.universe.zany.taskbreaker.viewmodels.ViewModelFactory;
 
 import org.junit.Test;
@@ -21,6 +21,6 @@ public class ViewModelFactoryTest {
 
         ViewModelFactory factory = new ViewModelFactory(repo);
 
-        assertEquals(TaskViewModel.class, factory.create(TaskViewModel.class).getClass());
+        assertEquals(MonthViewModel.class, factory.create(MonthViewModel.class).getClass());
     }
 }

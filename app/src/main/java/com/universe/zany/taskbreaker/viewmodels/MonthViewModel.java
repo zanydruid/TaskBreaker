@@ -15,12 +15,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-public class TaskViewModel extends ViewModel {
+public class MonthViewModel extends ViewModel {
 
     private TaskRepository repo;
 
     @Inject
-    public TaskViewModel(TaskRepository repo) {
+    public MonthViewModel(TaskRepository repo) {
         this.repo = repo;
     }
 

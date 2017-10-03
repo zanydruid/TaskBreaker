@@ -18,6 +18,7 @@ import java.util.Calendar;
 public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.TaskDayViewHolder> {
 
     private Month  mMonth;
+    private View.OnClickListener mListener;
 
     public DayInMonthAdapter(Month month) {
         mMonth = month;
@@ -27,6 +28,12 @@ public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.Ta
     public TaskDayViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_day, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onClick(view);
+            }
+        });
         return new TaskDayViewHolder(view);
     }
 
@@ -68,6 +75,10 @@ public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.Ta
     @Override
     public int getItemCount() {
         return mMonth.getDays().size();
+    }
+
+    public void setItemClickListener(View.OnClickListener callback) {
+        mListener = callback;
     }
 
 

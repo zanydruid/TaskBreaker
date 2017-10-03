@@ -22,7 +22,7 @@ import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
 import com.universe.zany.taskbreaker.util.DayInMonthAdapter;
 import com.universe.zany.taskbreaker.util.DayItemDecorator;
-import com.universe.zany.taskbreaker.viewmodels.TaskViewModel;
+import com.universe.zany.taskbreaker.viewmodels.MonthViewModel;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -40,7 +40,7 @@ public class MonthFragment extends Fragment {
     private static final int GRID_COLUMN_LANDSCAPE = 6;
     private int mYear;
     private int mMonth;
-    private TaskViewModel viewModel;
+    private MonthViewModel viewModel;
     private Month month;
     @Inject ViewModelProvider.Factory factory;
     // views
@@ -79,14 +79,14 @@ public class MonthFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // setup viewmodel here
-        viewModel = ViewModelProviders.of(this, factory).get(TaskViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(MonthViewModel.class);
 
         // observe task list
         viewModel.getTasksByMonth(mYear, mMonth).observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
                 month = Month.fillInTasks(tasks, mYear, mMonth);
-                updateList(month);
+                updateGrid(month);
             }
         });
     }
@@ -104,6 +104,7 @@ public class MonthFragment extends Fragment {
 
         // recycler view
         recyclerView = viewGroup.findViewById(R.id.frg_month_recycler_view);
+
 
         // create button
         createButton = viewGroup.findViewById(R.id.frg_month_create_button);
@@ -128,7 +129,7 @@ public class MonthFragment extends Fragment {
         return viewGroup;
     }
 
-    private void updateList(Month month) {
+    private void updateGrid(Month month) {
         GridLayoutManager manager;
         if (getActivity().getResources()
                 .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -144,6 +145,19 @@ public class MonthFragment extends Fragment {
         recyclerView.addItemDecoration(decorator);
 
         dayAdapter = new DayInMonthAdapter(month);
+        dayAdapter.setItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = recyclerView.indexOfChild(view);
+                Intent intent = new Intent(getActivity(), DayActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("today_year", mYear);
+                bundle.putInt("today_month", mMonth);
+                bundle.putInt("today_day", pos + 1);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(dayAdapter);
     }
 }
