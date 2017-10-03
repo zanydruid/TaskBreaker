@@ -39,19 +39,8 @@ public class TaskRepository {
         return this.taskDao.loadTasksInRange(start, end);
     }
 
-    public LiveData<List<Task>> getTasksInADay(Date today) {
-        Calendar timeCal = new GregorianCalendar();
-        timeCal.setTime(today);
-        int year = timeCal.get(Calendar.YEAR);
-        int day = timeCal.get(Calendar.DAY_OF_YEAR);
-        Calendar cal = new GregorianCalendar();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.DAY_OF_YEAR, day);
-        Long start = cal.getTimeInMillis();
-        cal.add(Calendar.DAY_OF_YEAR, 1);
-        Long end = cal.getTimeInMillis();
-
-        return this.taskDao.loadTasksInRange(start, end);
+    public LiveData<List<Task>> getTasksInDay(int year, int month, int day) {
+        return this.taskDao.loadTasksInDay(year, month, day);
     }
 
     public LiveData<List<Task>> getTasksInMonth(int year, int month) {

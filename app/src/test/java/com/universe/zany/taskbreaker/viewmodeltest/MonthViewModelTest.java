@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 /**
  *  sandbox
  */
-public class TaskViewModelTest {
+public class MonthViewModelTest {
 
 
     @Test

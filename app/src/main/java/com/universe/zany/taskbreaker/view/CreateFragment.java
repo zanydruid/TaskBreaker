@@ -282,10 +282,11 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
             passCheck = false;
         }
 
-        Calendar today = new GregorianCalendar();
-        today.set(Calendar.YEAR, mYear);
-        today.set(Calendar.MONTH, mMonth);
-        today.set(Calendar.DAY_OF_MONTH, mDay - 1);
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_YEAR, -1);
+//        today.set(Calendar.YEAR, mYear);
+//        today.set(Calendar.MONTH, mMonth);
+//        today.set(Calendar.DAY_OF_MONTH, mDay - 1);
         if (mTask.getDeadline().getTime() < today.getTimeInMillis()) {
             emptySlots.add("You can't create task in the past!!!");
             passCheck = false;
@@ -295,6 +296,8 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
     private void conductCreate() {
+        // TODO
+        // debug create a task from a day.
         if (mTask.getType() == -1) {
             return;
         }

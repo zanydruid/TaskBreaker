@@ -43,7 +43,7 @@ public class CreateViewModel extends ViewModel{
         cal.setTime(task.getDeadline());
 
         tasks.add(new Task(task));
-        for (int i = 0; i < duration; i++) {
+        for (int i = 0; i < duration - 1; i++) {
             cal.add(Calendar.DAY_OF_YEAR, 1);
             task.setDeadline(cal.getTime());
             tasks.add(new Task(task));
@@ -61,9 +61,10 @@ public class CreateViewModel extends ViewModel{
         List<Task> tasks = new ArrayList<>();
         Calendar cal = new GregorianCalendar();
         cal.setTime(task.getDeadline());
+        int weeks = duration / 7;
 
         tasks.add(new Task(task));
-        for (int i = 0; i < duration - 1; i = i + 7) {
+        for (int i = 0; i < weeks - 1; i++) {
             cal.add(Calendar.DAY_OF_YEAR, 7);
             task.setDeadline(cal.getTime());
             tasks.add(new Task(task));
@@ -81,10 +82,9 @@ public class CreateViewModel extends ViewModel{
         List<Task> tasks = new ArrayList<>();
         Calendar cal = new GregorianCalendar();
         cal.setTime(task.getDeadline());
-
         tasks.add(new Task(task));
         int month = duration / 30;
-        for (int i = 0;  i < month; i++) {
+        for (int i = 0;  i < month - 1; i++) {
             cal.add(Calendar.MONTH, 1);
             task.setDeadline(cal.getTime());
             tasks.add(new Task(task));
