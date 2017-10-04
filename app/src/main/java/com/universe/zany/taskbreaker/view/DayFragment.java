@@ -3,12 +3,12 @@ package com.universe.zany.taskbreaker.view;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,6 @@ import android.widget.Button;
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
-import com.universe.zany.taskbreaker.view.dummy.DummyContent.DummyItem;
 import com.universe.zany.taskbreaker.viewmodels.DayViewModel;
 
 import java.util.List;
@@ -88,7 +87,8 @@ public class DayFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
     }
@@ -114,9 +114,26 @@ public class DayFragment extends Fragment {
 
     }
 
+    private ItemTouchHelper.Callback createHelperCallback() {
+        return new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+            //not used, as the first parameter above is 0
+            @Override
+            public boolean onMove(RecyclerView recyclerView1, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                viewModel.completeTask(mTasks.get(position));
+
+                //ensure View is consistent with underlying data
+                mTasks.remove(position);
+                adapter.notifyItemRemoved(position);
+            }
+        };
     }
 }
