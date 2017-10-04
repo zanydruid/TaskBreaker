@@ -129,7 +129,7 @@ public class MonthFragment extends Fragment {
         return viewGroup;
     }
 
-    private void updateGrid(Month month) {
+    private void updateGrid(final Month month) {
         GridLayoutManager manager;
         if (getActivity().getResources()
                 .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -141,7 +141,7 @@ public class MonthFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
 
         // add divider
-        DayItemDecorator decorator = new DayItemDecorator(3);
+        DayItemDecorator decorator = new DayItemDecorator(6);
         recyclerView.addItemDecoration(decorator);
 
         dayAdapter = new DayInMonthAdapter(mYear, month);
@@ -149,13 +149,15 @@ public class MonthFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int pos = recyclerView.indexOfChild(view);
-                Intent intent = new Intent(getActivity(), DayActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("today_year", mYear);
-                bundle.putInt("today_month", mMonth);
-                bundle.putInt("today_day", pos + 1);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (pos >= month.getPRESET()) {
+                    Intent intent = new Intent(getActivity(), DayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("today_year", mYear);
+                    bundle.putInt("today_month", mMonth);
+                    bundle.putInt("today_day", pos + 1 - month.getPRESET());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
         recyclerView.setAdapter(dayAdapter);
