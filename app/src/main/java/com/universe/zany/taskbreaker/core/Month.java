@@ -2,12 +2,15 @@ package com.universe.zany.taskbreaker.core;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Month {
 
     private int month;
     private List<Day> days;
+    private int PRESET;
 
     public Month(int year, int month) {
         this.month = month % 12;
@@ -26,10 +29,18 @@ public class Month {
         } else {
             size = 30;
         }
-
-        //
-
         this.days = new ArrayList<>();
+        // calculate preset
+        Calendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        PRESET = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        for (int i = 0; i < PRESET; i++) {
+            Day preDay = new Day(-1);
+            this.days.add(preDay);
+        }
+
         int day = 0;
         while (day < size) {
             this.days.add(new Day(day + 1));
@@ -44,7 +55,7 @@ public class Month {
     public static Month fillInTasks(List<Task> tasks, int year, int month) {
         Month returnMonth = new Month(year, month);
         for (Task task : tasks) {
-            returnMonth.getDays().get(task.getDay() - 1).addTask(task);
+            returnMonth.getDay(task.getDay() - 1).addTask(task);
         }
         return returnMonth;
     }
@@ -79,11 +90,21 @@ public class Month {
         this.month = month;
     }
 
-    public List<Day> getDays() {
-        return days;
+    public int getSize() {
+        return this.days.size();
     }
 
-    public void setDays(List<Day> days) {
-        this.days = days;
+    public Day getDay(int day) {
+        return this.days.get(day + PRESET);
     }
+
+    public List<Day> getALlDays() {
+        return this.days;
+    }
+
+    public int getPRESET() {
+        return PRESET;
+    }
+
+
 }
