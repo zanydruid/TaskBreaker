@@ -17,10 +17,12 @@ import java.util.Calendar;
 
 public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.TaskDayViewHolder> {
 
+    private int mYear;
     private Month  mMonth;
     private View.OnClickListener mListener;
 
-    public DayInMonthAdapter(Month month) {
+    public DayInMonthAdapter(int year, Month month) {
+        mYear = year;
         mMonth = month;
     }
 
@@ -45,7 +47,7 @@ public class DayInMonthAdapter extends RecyclerView.Adapter<DayInMonthAdapter.Ta
         // set background color
         boolean passed = false;
         Calendar cal = Calendar.getInstance();
-        if (cal.get(Calendar.MONTH) > mMonth.getMonth()) {
+        if (cal.get(Calendar.YEAR) > mYear && cal.get(Calendar.MONTH) > mMonth.getMonth()) {
             passed = true;
         } else if (cal.get(Calendar.MONTH) == mMonth.getMonth()
                 && cal.get(Calendar.DAY_OF_MONTH) > currentDay.getDay()) {

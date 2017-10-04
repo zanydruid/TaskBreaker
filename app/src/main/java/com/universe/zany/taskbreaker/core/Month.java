@@ -12,6 +12,7 @@ public class Month {
     public Month(int year, int month) {
         this.month = month % 12;
 
+        // how many days in this month
         int size;
         if (this.month == 0 || this.month == 2 || this.month == 4
                 || this.month == 6 || this.month == 7 || this.month == 9 || this.month == 11) {
@@ -25,6 +26,8 @@ public class Month {
         } else {
             size = 30;
         }
+
+        //
 
         this.days = new ArrayList<>();
         int day = 0;
