@@ -34,10 +34,10 @@ public interface TaskDao {
     @Query("SELECT * FROM Tasks WHERE id = :taskId")
     LiveData<Task> findTaskById(int taskId);
 
-    @Query("SELECT * FROM Tasks WHERE year = :year AND month = :month")
+    @Query("SELECT * FROM Tasks WHERE year = :year AND month = :month AND status = 0")
     LiveData<List<Task>> loadTasksInMonth(int year, int month);
 
-    @Query("SELECT * FROM Tasks WhERE year = :year AND month = :month AND day = :day")
+    @Query("SELECT * FROM Tasks WhERE year = :year AND month = :month AND day = :day AND status = 0")
     LiveData<List<Task>> loadTasksInDay(int year, int month, int day);
 
     @Update

@@ -1,5 +1,6 @@
 package com.universe.zany.taskbreaker.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
@@ -19,24 +20,15 @@ public class CreateViewModel extends ViewModel{
     private TaskRepository repo;
 
     @Inject
-    public CreateViewModel(TaskRepository repository) {
+    CreateViewModel(TaskRepository repository) {
         this.repo = repository;
     }
 
-    /**
-     * Create a single task
-     * @param task
-     */
     public void createSingleTask(Task task) {
         AsyncCreateSingleTask job = new AsyncCreateSingleTask();
         job.execute(task);
     }
 
-    /**
-     * Create a daily task for a specific duration
-     * @param task
-     * @param duration
-     */
     public void createDailyTask(Task task, int duration) {
         List<Task> tasks = new ArrayList<>();
         Calendar cal = new GregorianCalendar();
@@ -52,11 +44,6 @@ public class CreateViewModel extends ViewModel{
         new AsyncCreateMultiTasks().execute(tasks);
     }
 
-    /**
-     * Create a weekly task in specific duration
-     * @param task
-     * @param duration
-     */
     public void createWeeklyTask(Task task, int duration) {
         List<Task> tasks = new ArrayList<>();
         Calendar cal = new GregorianCalendar();
@@ -64,7 +51,7 @@ public class CreateViewModel extends ViewModel{
         int weeks = duration / 7;
 
         tasks.add(new Task(task));
-        for (int i = 0; i < weeks - 1; i++) {
+        for (int i = 0; i < weeks; i++) {
             cal.add(Calendar.DAY_OF_YEAR, 7);
             task.setDeadline(cal.getTime());
             tasks.add(new Task(task));
@@ -73,11 +60,6 @@ public class CreateViewModel extends ViewModel{
         new AsyncCreateMultiTasks().execute(tasks);
     }
 
-    /**
-     * Create a monthly task in specific duration
-     * @param task
-     * @param duration
-     */
     public void createMonthlyTask(Task task, int duration) {
         List<Task> tasks = new ArrayList<>();
         Calendar cal = new GregorianCalendar();

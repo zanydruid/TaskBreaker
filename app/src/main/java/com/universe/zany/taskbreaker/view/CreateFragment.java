@@ -39,9 +39,6 @@ import javax.inject.Inject;
 
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener, DialogInterface.OnClickListener{
 
-    //TODO
-    // redesign create date and deadline
-
     private static final String YEAR = "year";
     private static final String MONTH = "month";
     private static final String DAY = "day";
@@ -84,6 +81,8 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         return fragment;
     }
 
+    //=====================life cycle =====================
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +98,8 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         // init task object
         mTask = new Task();
         mTask.setCreated(new Date());
-        mTask.setDeadline(new Date());
+        Calendar cal = createCal(mYear, mMonth, mDay);
+        mTask.setDeadline(cal.getTime());
 
         datePickerFragment = DatePickerFragment.newDialog(this);
     }
@@ -284,9 +284,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_YEAR, -1);
-//        today.set(Calendar.YEAR, mYear);
-//        today.set(Calendar.MONTH, mMonth);
-//        today.set(Calendar.DAY_OF_MONTH, mDay - 1);
         if (mTask.getDeadline().getTime() < today.getTimeInMillis()) {
             emptySlots.add("You can't create task in the past!!!");
             passCheck = false;
@@ -352,12 +349,12 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         String duration = durationInputEdit.getText().toString();
         String unit = durationUnitSpinner.getSelectedItem().toString();
         // build message
-        messageBuilder.append(content + "\n");
-        messageBuilder.append("Deadline: " + deadline + "\n");
+        messageBuilder.append(content).append("\n");
+        messageBuilder.append("Deadline: ").append(deadline).append("\n");
 
         if (typePosition != 0) {
-            messageBuilder.append("Repeat: " + type + "\n");
-            messageBuilder.append("Continue for " + duration + " " + unit);
+            messageBuilder.append("Repeat: ").append(type).append("\n");
+            messageBuilder.append("Continue for ").append(duration).append(" ").append(unit);
         }
 
         return messageBuilder.toString();
