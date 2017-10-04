@@ -36,8 +36,8 @@ public class MonthFragment extends Fragment {
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";
-    private static final int GRID_COLUMN_PORTRAIT = 5;
-    private static final int GRID_COLUMN_LANDSCAPE = 6;
+    private static final int GRID_COLUMN_PORTRAIT = 7;
+    private static final int GRID_COLUMN_LANDSCAPE = 7;
     private int mYear;
     private int mMonth;
     private MonthViewModel viewModel;
@@ -144,7 +144,7 @@ public class MonthFragment extends Fragment {
         DayItemDecorator decorator = new DayItemDecorator(3);
         recyclerView.addItemDecoration(decorator);
 
-        dayAdapter = new DayInMonthAdapter(month);
+        dayAdapter = new DayInMonthAdapter(mYear, month);
         dayAdapter.setItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
