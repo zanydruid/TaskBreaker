@@ -16,6 +16,11 @@
     <string name="another_new_task">Create Another New Task</string>
     <string name="confirm_create_title">Confirm Task information, Action is permanent!!!</string>
 
+    <string name="home">home</string>
+    <string name="tasks_in_today">Tasks in today</string>
+    <string name="tasks_in_month">Tasks in month</string>
+    <string name="statistics">Task log(coming)</string>
+
     <string-array name="task_type">
         <item>Single</item>
         <item>Daily</item>
@@ -29,4 +34,7 @@
         <item>month(s)</item>
         <item>year(s)</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

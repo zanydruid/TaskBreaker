@@ -48,6 +48,7 @@ public class MonthFragment extends Fragment {
     private RecyclerView recyclerView;
     private DayInMonthAdapter dayAdapter;
     private Button createButton;
+    private Button homeButton;
 
 
     public static MonthFragment newInstance(int year, int month) {
@@ -122,6 +123,15 @@ public class MonthFragment extends Fragment {
                 bundle.putInt("today_month", month);
                 bundle.putInt("today_day", day);
                 intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        homeButton = viewGroup.findViewById(R.id.frg_month_home_button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
                 startActivity(intent);
             }
         });
