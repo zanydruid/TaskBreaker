@@ -19,10 +19,13 @@
         android:id="@+id/frg_month_create_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/new_task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/frg_month_home_button" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/frg_month_recycler_view"
@@ -39,4 +42,16 @@
         app:layout_constraintTop_toBottomOf="@+id/frg_month_text_view"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="27dp" />
+
+    <Button
+        android:id="@+id/frg_month_home_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frg_month_create_button"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
