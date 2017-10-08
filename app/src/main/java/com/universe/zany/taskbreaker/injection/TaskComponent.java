@@ -1,8 +1,10 @@
 package com.universe.zany.taskbreaker.injection;
 
 
+import com.universe.zany.taskbreaker.service.CleanPassedTaskService;
 import com.universe.zany.taskbreaker.view.CreateFragment;
 import com.universe.zany.taskbreaker.view.DayFragment;
+import com.universe.zany.taskbreaker.view.HomeFragment;
 import com.universe.zany.taskbreaker.view.MonthFragment;
 
 import javax.inject.Singleton;
@@ -16,6 +18,9 @@ public interface TaskComponent {
     void inject(MonthFragment fragment);
     void inject(CreateFragment fragment);
     void inject(DayFragment fragment);
+    void inject(HomeFragment fragment);
+    void inject(CleanPassedTaskService service);
+
 
     final class Initializer {
         private Initializer() {}

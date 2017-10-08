@@ -12,6 +12,8 @@ import com.universe.zany.taskbreaker.core.Task;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 @Dao
 public interface TaskDao {
@@ -37,11 +39,23 @@ public interface TaskDao {
     @Query("SELECT * FROM Tasks WHERE year = :year AND month = :month AND status = 0")
     LiveData<List<Task>> loadTasksInMonth(int year, int month);
 
-    @Query("SELECT * FROM Tasks WhERE year = :year AND month = :month AND day = :day AND status = 0")
+    @Query("SELECT * FROM Tasks WHERE year = :year AND month = :month AND day = :day AND status = 0")
     LiveData<List<Task>> loadTasksInDay(int year, int month, int day);
 
+    @Query("SELECT * FROM Tasks WHERE status = 0 AND deadline < :today")
+    LiveData<List<Task>> loadAllPassedTasks(Long today);
+
     @Update
-    void updateTasks(Task... task);
+    void updateTask(Task... task);
+
+    @Update
+    void updateTasks(List<Task> tasks);
+
+    @Query("SELECT COUNT(*) FROM Tasks")
+    LiveData<Integer> loadNumOfCreatedTasks();
+
+    @Query("SELECT COUNT(*) FROM Tasks WHERE status = -1")
+    LiveData<Integer> loadNumOfFailedTasks();
 
     @Delete
     void deleteTasks(Task... tasks);

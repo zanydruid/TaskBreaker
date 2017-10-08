@@ -1,23 +1,39 @@
 package com.universe.zany.taskbreaker.view;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.injection.MainApplication;
+import com.universe.zany.taskbreaker.viewmodels.HomeViewModel;
 
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
 public class HomeFragment extends Fragment {
 
+    private HomeViewModel viewModel;
+
+    @Inject
+    ViewModelProvider.Factory factory;
+    // views
     private Button taskInMonthButton;
     private Button taskInDayButton;
     private Button newTaskButton;
+    private TextView createdTextView;
+    private TextView failedTextView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -78,7 +94,38 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        createdTextView = view.findViewById(R.id.frg_home_created_textview);
+        failedTextView = view.findViewById(R.id.frg_home_failed_textview);
+
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainApplication)getActivity().getApplication()).getTaskComponent().inject(this);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
+
+        viewModel.getNumOfCreatedTask().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                String created = "Created: " + String.valueOf(integer);
+                createdTextView.setText(created);
+            }
+        });
+
+        viewModel.getNumOfFailedTask().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                String failed = "Failed: " + String.valueOf(integer);
+                failedTextView.setText(failed);
+            }
+        });
+    }
 }

@@ -1,14 +1,17 @@
 package com.universe.zany.taskbreaker.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 import com.universe.zany.taskbreaker.R;
+import com.universe.zany.taskbreaker.service.CleanPassedTaskService;
 import com.universe.zany.taskbreaker.util.BaseActivity;
 
 public class HomeActivity extends BaseActivity {
 
     private static final String HOME_TAG = "home_tag";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,18 +19,23 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
 
         FragmentManager manager = getSupportFragmentManager();
-
         HomeFragment fragment = (HomeFragment) manager.findFragmentByTag(HOME_TAG);
-
         if (fragment == null) {
             fragment = HomeFragment.newInstance();
         }
-
         addFragmentToActivity(
                 manager,
                 fragment,
                 R.id.activity_home_root,
                 HOME_TAG
         );
+    }
+
+    @Override
+    protected void onResume() {
+
+        Intent intent = new Intent(this, CleanPassedTaskService.class);
+        startService(intent);
+        super.onResume();
     }
 }

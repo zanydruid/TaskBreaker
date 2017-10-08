@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.util.BaseActivity;
+import com.universe.zany.taskbreaker.util.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +39,7 @@ public class MonthPageViewActivity extends BaseActivity {
         viewPager = findViewById(R.id.month_pager);
         pagerAdapter = new MonthPagerAdapter(getSupportFragmentManager(), mYear, mMonths);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
     private class MonthPagerAdapter extends FragmentStatePagerAdapter {

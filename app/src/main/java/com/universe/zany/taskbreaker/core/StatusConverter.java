@@ -2,6 +2,11 @@ package com.universe.zany.taskbreaker.core;
 
 import android.arch.persistence.room.TypeConverter;
 
+/**
+ *  IN_PROGRESS 0
+ *  COMPLETED 1
+ *  FAILED -1
+ */
 public class StatusConverter {
     @TypeConverter
     public static int statusToInt(Task.Status status) {
