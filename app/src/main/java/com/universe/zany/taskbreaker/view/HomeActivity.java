@@ -12,7 +12,6 @@ public class HomeActivity extends BaseActivity {
 
     private static final String HOME_TAG = "home_tag";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +28,17 @@ public class HomeActivity extends BaseActivity {
                 R.id.activity_home_root,
                 HOME_TAG
         );
+
+                // clean passed tasks
+        Intent cleanPassedTasksIntent = new Intent(this, CleanPassedTaskService.class);
+        startService(cleanPassedTasksIntent);
     }
 
     @Override
-    protected void onResume() {
+    protected void onStart() {
+        super.onStart();
 
-        Intent intent = new Intent(this, CleanPassedTaskService.class);
-        startService(intent);
-        super.onResume();
     }
+
+
 }
