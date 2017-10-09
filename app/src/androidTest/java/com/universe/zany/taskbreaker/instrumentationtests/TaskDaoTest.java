@@ -93,6 +93,13 @@ public class TaskDaoTest {
         Task findTask = getValue(mDatabase.taskDao().findTaskById(tempTask.getId()));
         assertEquals(tempTask.getContent(), findTask.getContent());
 
+        // test loadTasksInMonth
+
+        // test loadTasksInDay
+
+        // test loadAllPassedTasks
+        //TODO finish all tests
+
     }
 
 }

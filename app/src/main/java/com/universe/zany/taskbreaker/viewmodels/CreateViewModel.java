@@ -1,6 +1,5 @@
 package com.universe.zany.taskbreaker.viewmodels;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 

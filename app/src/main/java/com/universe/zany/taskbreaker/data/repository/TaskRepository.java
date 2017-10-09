@@ -48,6 +48,12 @@ public class TaskRepository {
         return this.taskDao.loadTasksInMonth(year, month);
     }
 
+    public LiveData<List<Task>> getPassedTasks() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        return this.taskDao.loadAllPassedTasks(cal.getTimeInMillis());
+    }
+
     public LiveData<List<Task>> getTasksByKeyword(String keyword) {
         return this.taskDao.searchTaskByContent("%" + keyword +"%");
     }
@@ -61,7 +67,19 @@ public class TaskRepository {
     }
 
     public void updateTask(Task task) {
-        this.taskDao.updateTasks(task);
+        this.taskDao.updateTask(task);
+    }
+
+    public void updateTasks(List<Task> tasks) {
+        this.taskDao.updateTasks(tasks);
+    }
+
+    public LiveData<Integer> getNumOfCreatedTasks() {
+        return this.taskDao.loadNumOfCreatedTasks();
+    }
+
+    public LiveData<Integer> getNumOfFailedTasks() {
+        return this.taskDao.loadNumOfFailedTasks();
     }
 
     public void deletTask(Task task) {

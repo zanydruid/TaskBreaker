@@ -1,8 +1,11 @@
 package com.universe.zany.taskbreaker.view;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +20,10 @@ import android.widget.Button;
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.core.Task;
 import com.universe.zany.taskbreaker.injection.MainApplication;
+import com.universe.zany.taskbreaker.service.DailyNotifyService;
 import com.universe.zany.taskbreaker.viewmodels.DayViewModel;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,7 +34,6 @@ public class DayFragment extends Fragment {
     private static final String YEAR = "year";
     private static final String MONTH = "month";
     private static final String DAY = "day";
-    //private OnListFragmentInteractionListener mListener;
 
     private int mYear;
     private int mMonth;
@@ -40,6 +44,9 @@ public class DayFragment extends Fragment {
     private DayViewModel viewModel;
     @Inject
     ViewModelProvider.Factory factory;
+
+    private PendingIntent dailyNotifyPendingIntent;
+    private AlarmManager alarmManager;
 
     // views
     private RecyclerView recyclerView;
@@ -67,6 +74,8 @@ public class DayFragment extends Fragment {
         mDay = args.getInt(DAY);
         ((MainApplication)getActivity().getApplication())
                 .getTaskComponent().inject(this);
+
+        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
     }
 
     @Override
@@ -104,6 +113,8 @@ public class DayFragment extends Fragment {
             public void onChanged(@Nullable List<Task> tasks) {
                 mTasks = tasks;
                 updateList(mTasks);
+                //TODO
+                setDailyNotification();
             }
         });
     }
@@ -135,5 +146,24 @@ public class DayFragment extends Fragment {
                 adapter.notifyItemRemoved(position);
             }
         };
+    }
+
+
+    private void setDailyNotification() {
+        // set alarm for notification
+        Intent dailyNotifyIntent = new Intent(getContext(), DailyNotifyService.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("daily_num_tasks", mTasks.size());
+        dailyNotifyIntent.putExtras(bundle);
+        dailyNotifyPendingIntent = PendingIntent.getService(getContext(), 1,
+                dailyNotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // set alarm repeat time
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 10);
+        cal.set(Calendar.MINUTE, 23);
+        // set alarm
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                AlarmManager.INTERVAL_HOUR, dailyNotifyPendingIntent);
     }
 }

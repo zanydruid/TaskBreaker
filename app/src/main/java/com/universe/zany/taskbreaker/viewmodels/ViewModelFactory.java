@@ -27,6 +27,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new CreateViewModel(repository);
         } else if (modelClass.isAssignableFrom(DayViewModel.class)) {
             return (T) new DayViewModel(repository);
+        } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
+            return (T) new HomeViewModel(repository);
         } else {
             throw new IllegalArgumentException();
         }

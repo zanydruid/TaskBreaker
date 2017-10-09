@@ -33,4 +33,9 @@ public class DayActivity extends BaseActivity {
                 DAY_TAG
         );
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }

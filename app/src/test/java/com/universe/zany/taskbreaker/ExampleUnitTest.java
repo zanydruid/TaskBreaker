@@ -3,6 +3,7 @@ package com.universe.zany.taskbreaker;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,22 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        Calendar cal = Calendar.getInstance();
-        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+        int x = 93;
+        int y = 73;
+
+        int xStep = 0;
+        int yStep = 0;
+
+        while (x > 0) {
+            x = x >> 1;
+            xStep++;
+        }
+
+        while (y > 0) {
+            y = y >> 1;
+            yStep++;
+        }
+
+        System.out.println(Math.abs(xStep - yStep));
     }
 }

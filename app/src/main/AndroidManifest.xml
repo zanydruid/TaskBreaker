@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.universe.zany.taskbreaker">
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:name=".injection.MainApplication"
@@ -16,10 +17,11 @@
         <activity android:name=".view.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".service.DailyNotifyService"/>
+        <service android:name=".service.CleanPassedTaskService"/>
     </application>
 
 </manifest>
