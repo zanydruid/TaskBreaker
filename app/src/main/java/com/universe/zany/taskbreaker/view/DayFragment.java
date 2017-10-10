@@ -74,8 +74,6 @@ public class DayFragment extends Fragment {
         mDay = args.getInt(DAY);
         ((MainApplication)getActivity().getApplication())
                 .getTaskComponent().inject(this);
-
-        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
     }
 
     @Override
@@ -113,8 +111,6 @@ public class DayFragment extends Fragment {
             public void onChanged(@Nullable List<Task> tasks) {
                 mTasks = tasks;
                 updateList(mTasks);
-                //TODO
-                setDailyNotification();
             }
         });
     }
@@ -149,21 +145,5 @@ public class DayFragment extends Fragment {
     }
 
 
-    private void setDailyNotification() {
-        // set alarm for notification
-        Intent dailyNotifyIntent = new Intent(getContext(), DailyNotifyService.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("daily_num_tasks", mTasks.size());
-        dailyNotifyIntent.putExtras(bundle);
-        dailyNotifyPendingIntent = PendingIntent.getService(getContext(), 1,
-                dailyNotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // set alarm repeat time
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        cal.set(Calendar.MINUTE, 23);
-        // set alarm
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                AlarmManager.INTERVAL_HOUR, dailyNotifyPendingIntent);
-    }
+
 }

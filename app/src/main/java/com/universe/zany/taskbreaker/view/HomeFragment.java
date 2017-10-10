@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private Button taskInMonthButton;
     private Button taskInDayButton;
     private Button newTaskButton;
+    private Button settingButton;
     private TextView createdTextView;
     private TextView failedTextView;
 
@@ -90,6 +91,15 @@ public class HomeFragment extends Fragment {
                 bundle.putInt("today_month", month);
                 bundle.putInt("today_day", day);
                 intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        settingButton = view.findViewById(R.id.frg_home_setting_button);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
             }
         });

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
 import com.universe.zany.taskbreaker.R;
 import com.universe.zany.taskbreaker.util.BaseActivity;
@@ -65,6 +66,11 @@ public class MonthPageViewActivity extends BaseActivity {
         @Override
         public int getCount() {
             return months.size();
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
         }
     }
 
