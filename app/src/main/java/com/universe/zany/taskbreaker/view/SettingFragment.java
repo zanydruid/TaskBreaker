@@ -118,7 +118,7 @@ public class SettingFragment extends Fragment implements TimePickerDialog.OnTime
 
         // set alarm
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, dailyNotificationCal.getTimeInMillis(),
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES, dailyNotifyPendingIntent);
+                AlarmManager.INTERVAL_DAY, dailyNotifyPendingIntent);
         saveDailyNotificationState(true);
         Toast.makeText(getContext(), "Daily notification on.", Toast.LENGTH_SHORT).show();
     }
