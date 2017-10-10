@@ -15,6 +15,8 @@
     <string name="ok">OK</string>
     <string name="another_new_task">Create Another New Task</string>
     <string name="confirm_create_title">Confirm Task information, Action is permanent!!!</string>
+    <string name="daily_notification">Daily notification</string>
+    <string name="pick_a_time">Pick a time.</string>
 
     <string name="home">home</string>
     <string name="tasks_in_today">Tasks in today</string>

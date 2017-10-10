@@ -1,4 +1,4 @@
-package com.universe.zany.taskbreaker.instrumentationtests;
+package com.universe.zany.taskbreaker.util;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;

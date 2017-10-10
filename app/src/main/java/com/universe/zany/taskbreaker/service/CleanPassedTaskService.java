@@ -14,6 +14,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.universe.zany.taskbreaker.util.SyncLiveData.getValue;
+
 public class CleanPassedTaskService extends IntentService{
 
     private static final String TAG = "CleanPassedTasksService";
@@ -35,8 +37,14 @@ public class CleanPassedTaskService extends IntentService{
     protected void onHandleIntent(@Nullable Intent intent) {
         Log.i(TAG, "cleaning passed tasks...");
         //Toast.makeText(getApplicationContext(), "Cleaning passed tasks...", Toast.LENGTH_SHORT).show();
-        List<Task> passedTasks = this.repo.getPassedTasks().getValue();
+        List<Task> passedTasks = null;
+        try {
+            passedTasks = getValue(this.repo.getPassedTasks());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (passedTasks == null) {
+            Log.i(TAG, "nothing to clean.");
             return;
         }
         for (Task task : passedTasks) {
