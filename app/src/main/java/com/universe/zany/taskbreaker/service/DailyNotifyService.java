@@ -75,7 +75,8 @@ public class DailyNotifyService extends IntentService{
                 .setContentTitle("Task Breaker")
                 .setContentText(content)
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
 
         NotificationManager notificationManager = (NotificationManager) getApplicationContext()
                 .getSystemService(Context.NOTIFICATION_SERVICE);

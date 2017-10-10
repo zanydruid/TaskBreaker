@@ -91,9 +91,9 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                 .inject(this);
 
         Bundle bundle = getArguments();
-        mYear = bundle.getInt(YEAR, 2017);
-        mMonth = bundle.getInt(MONTH, 11);
-        mDay = bundle.getInt(DAY, 31);
+        mYear = bundle.getInt(YEAR, 0);
+        mMonth = bundle.getInt(MONTH, 0);
+        mDay = bundle.getInt(DAY, 0);
 
         // init task object
         mTask = new Task();
