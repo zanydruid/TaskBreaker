@@ -2,6 +2,7 @@ package com.universe.zany.taskbreaker.injection;
 
 
 import com.universe.zany.taskbreaker.service.CleanPassedTaskService;
+import com.universe.zany.taskbreaker.service.DailyNotifyService;
 import com.universe.zany.taskbreaker.view.CreateFragment;
 import com.universe.zany.taskbreaker.view.DayFragment;
 import com.universe.zany.taskbreaker.view.HomeFragment;
@@ -20,6 +21,7 @@ public interface TaskComponent {
     void inject(DayFragment fragment);
     void inject(HomeFragment fragment);
     void inject(CleanPassedTaskService service);
+    void inject(DailyNotifyService service);
 
 
     final class Initializer {
